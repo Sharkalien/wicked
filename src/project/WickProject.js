@@ -40,7 +40,7 @@ var WickProject = function () {
 
     this.pixelPerfectRendering = false;
 
-    this.framerate = 12;
+    this.framerate = 24;
 
     this.uuid = random.uuid4();
 
