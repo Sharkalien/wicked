@@ -37,7 +37,7 @@ WickEditorSettings.prototype.getDefaults = function () {
         pencilSmoothing : 1,
         strokeWidth : 5,
         strokeColor : "#000000",
-        fillColor : "#9999FF",
+        fillColor : "#FFFFFF",
         rectangleCornerRadius : 0,
         strokeCap : 'round',
         strokeJoin : 'round',
