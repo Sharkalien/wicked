@@ -352,7 +352,7 @@ InspectorInterface.TwoColorPickerInput = function (args) {
 
 }
 
-InspectorInterface.SelectInput = function (args) {
+InspectorInterface.DropdownInput = function (args) {
 
     var self = this;
     self.getValueFn = args.getValueFn;

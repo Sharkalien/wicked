@@ -143,7 +143,7 @@ InspectorInterface.getProperties = function (wickEditor, inspector) {
         }
     }));
 
-    properties.push(new InspectorInterface.SelectInput({
+    properties.push(new InspectorInterface.DropdownInput({
         title: '<img src="resources/inspector-icons/fontfamily.svg" class="inspector-icon"/>',
         tooltip: 'Font Family',
         options: getAllGoogleFonts(),
@@ -518,7 +518,7 @@ InspectorInterface.getProperties = function (wickEditor, inspector) {
         }
     }));
 
-    properties.push(new InspectorInterface.SelectInput({
+    properties.push(new InspectorInterface.DropdownInput({
         title: '<img src="resources/inspector-icons/sound.svg" class="inspector-icon"/>',
         tooltip: 'Sound',
         optionsFn: function () {
@@ -566,7 +566,39 @@ InspectorInterface.getProperties = function (wickEditor, inspector) {
             selectionInfo.object.volume = parseFloat(val);
         }
     }));
+// TODO: add option to change easing type ie quadratic, elastic, bounce, etc
+    properties.push(new InspectorInterface.DropdownInput({
+        title: '<img src="resources/inspector-icons/ease.svg" class="inspector-icon"/>>',
+        tooltip: 'Easing Function',
+        options: [
+		'None',
+		'In',
+		'Out',
+		'InOut'
+		],
+        isActiveFn: function () {
+            return selectionInfo.type === 'frame' 
+                && selectionInfo.numObjects === 1 
+                && selectionInfo.object.getCurrentTween();
+        },
+        getValueFn: function () {
+            var tweenDir = selectionInfo.object.getCurrentTween().tweenDir
+			return tweenDir
+        }, 
+        onChangeFn: function (val) {
+            var tween = selectionInfo.object.getCurrentTween();
 
+            if(tween.tweenDir !== val) {
+                tween.tweenDir = val;
+                tween.tweenType = 'Linear'
+				if(val !== 'None') {
+					tween.tweenType = 'Quadratic'
+				}
+            }
+            wickEditor.syncInterfaces();
+        }
+    }));
+/*
     properties.push(new InspectorInterface.MultiCheckboxInput({
         title: '<img src="resources/inspector-icons/ease.svg" class="inspector-icon"/>',
         tooltip: 'Easing Direction',
@@ -609,7 +641,7 @@ InspectorInterface.getProperties = function (wickEditor, inspector) {
             wickEditor.syncInterfaces();
         }
     }));
-
+*/
 /* Buttons */
 
     properties.push(new InspectorInterface.InspectorButton({
