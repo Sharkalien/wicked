@@ -566,7 +566,7 @@ InspectorInterface.getProperties = function (wickEditor, inspector) {
             selectionInfo.object.volume = parseFloat(val);
         }
     }));
-// TODO: add option to change easing type ie quadratic, elastic, bounce, etc
+
     properties.push(new InspectorInterface.DropdownInput({
         title: '<img src="resources/inspector-icons/ease.svg" class="inspector-icon"/>>',
         tooltip: 'Easing Function',
@@ -582,66 +582,61 @@ InspectorInterface.getProperties = function (wickEditor, inspector) {
                 && selectionInfo.object.getCurrentTween();
         },
         getValueFn: function () {
-            var tweenDir = selectionInfo.object.getCurrentTween().tweenDir
-			return tweenDir
+            return tweenDir = selectionInfo.object.getCurrentTween().tweenDir;
         }, 
         onChangeFn: function (val) {
             var tween = selectionInfo.object.getCurrentTween();
 
             if(tween.tweenDir !== val) {
                 tween.tweenDir = val;
-                tween.tweenType = 'Linear'
-				if(val !== 'None') {
-					tween.tweenType = 'Quadratic'
+				if(val === 'None') {
+					tween.tweenType = 'Linear';
 				}
             }
             wickEditor.syncInterfaces();
         }
     }));
-/*
-    properties.push(new InspectorInterface.MultiCheckboxInput({
-        title: '<img src="resources/inspector-icons/ease.svg" class="inspector-icon"/>',
-        tooltip: 'Easing Direction',
-        icons: [
-            'resources/ease-none.png',
-            'resources/ease-in.png', 
-            'resources/ease-out.png',
-            'resources/ease-in-out.png',
-        ],
+
+    properties.push(new InspectorInterface.DropdownInput({
+        title: '<img src="resources/inspector-icons/ease.svg" class="inspector-icon"/>>',
+        tooltip: 'Easing Type',
+        options: [
+		'Linear',
+		'Quadratic',
+		'Cubic',
+		'Quartic',
+		'Quintic',
+		'Sinusoidal',
+		'Exponential',
+		'Circular',
+		'Elastic',
+		'Back',
+		'Bounce'
+		],
         isActiveFn: function () {
             return selectionInfo.type === 'frame' 
                 && selectionInfo.numObjects === 1 
                 && selectionInfo.object.getCurrentTween();
         },
         getValueFn: function () {
-            var tweenDir = selectionInfo.object.getCurrentTween().tweenDir
-            return [
-                tweenDir === 'None',
-                tweenDir === 'In',
-                tweenDir === 'Out',
-                tweenDir === 'InOut',
-            ];
+            return tweenDir = selectionInfo.object.getCurrentTween().tweenType;
         }, 
-        onChangeFn: function (vals) {
+        onChangeFn: function (val) {
             var tween = selectionInfo.object.getCurrentTween();
 
-            if(vals[0] && tween.tweenDir !== 'None') {
-                tween.tweenDir = 'None';
-                tween.tweenType = 'Linear'
-            } else if (vals[1] && tween.tweenDir !== 'In') {
-                tween.tweenDir = 'In';
-                tween.tweenType = 'Quadratic';
-            } else if (vals[2] && tween.tweenDir !== 'Out') {
-                tween.tweenDir = 'Out';
-                tween.tweenType = 'Quadratic';
-            } else if (vals[3] && tween.tweenDir !== 'InOut') {
-                tween.tweenDir = 'InOut';
-                tween.tweenType = 'Quadratic';
+            if(tween.tweenType !== val) {
+                tween.tweenType = val;
+				if(tween.tweenDir === 'None') {
+					tween.tweenDir = 'In'; /* failsafe to avoid WickTween error */
+				}
+				if(val === 'Linear') {
+					tween.tweenDir = 'None';
+				}
             }
             wickEditor.syncInterfaces();
         }
     }));
-*/
+
 /* Buttons */
 
     properties.push(new InspectorInterface.InspectorButton({
