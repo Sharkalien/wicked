@@ -221,13 +221,13 @@ var MenuBarInterface = function (wickEditor) {
                 wickEditor.guiActionHandler.doAction("openEditorSettings");
             }),
             new TabButton('Examples', function () {
-                window.open('http://www.wickeditor.com/#examples')
+                window.open('https://www.wickeditor.com/#examples')
             }),
             new TabButton('Tutorials', function () {
-                window.open('http://www.wickeditor.com/#tutorials')
+                window.open('https://www.wickeditor.com/#tutorials')
             }),
             new TabButton('Forums', function () {
-                window.open('http://forum.wickeditor.com/')
+                window.open('https://forum.wickeditor.com/')
             }),
             new TabButton('Browser Info', function () {
                 wickEditor.guiActionHandler.doAction('printBrowserInfo');
@@ -236,10 +236,10 @@ var MenuBarInterface = function (wickEditor) {
 
         addTab('About', [
             new TabButton('Source code', function () {
-                window.open('https://www.github.com/zrispo/wick/');
+                window.open('https://www.github.com/Sharkalien/wicked/');
             }),
             new TabButton('Credits', function () {
-                window.open('http://www.wickeditor.com/#about');
+                window.open('https://www.wickeditor.com/#about');
             }),
         ]);
 

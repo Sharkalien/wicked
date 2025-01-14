@@ -27,7 +27,8 @@ var EditorCredits = function (wickEditor) {
             self.close();
         }
 
-        $('.editorCreditsContent').load('resources/credits.html');
+        // $('.editorCreditsContent').load('resources/credits.html');
+        console.log("this shit wasn't even implemented lol")
     }
 
     self.syncWithEditorState = function () {
