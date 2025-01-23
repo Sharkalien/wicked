@@ -80,7 +80,7 @@ var ImageRenderer = function () {
         });
 
     }
-
+// TODO: redo all this with the MediaStream Recording API
     self.getProjectFrames = function (callback) {
         console.log('Rendering frames...');
         wickEditor.videoExporter.setSparkText('Rendering frames...');

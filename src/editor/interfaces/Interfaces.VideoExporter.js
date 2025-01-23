@@ -14,7 +14,7 @@
 
     You should have received a copy of the GNU General Public License
     along with Wick.  If not, see <http://www.gnu.org/licenses/>. */
-
+// TODO: redo all this with the MediaStream Recording API
 var VideoExporterInterface = function (wickEditor) {
     var self = this;
     var videoExportWindow = document.getElementById('videoExportGUI');
