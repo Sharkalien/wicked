@@ -41,7 +41,7 @@ WickPlayerInputHandler = function (canvasContainer, wickProject) {
         keysJustPressed = [];
         keysJustReleased = [];
 
-        if(bowser.mobile || bowser.tablet) {
+        if(('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0)) {
             // Touch event (one touch = like a mouse click)
             document.body.addEventListener("touchstart", onTouchStart, false);
             document.body.addEventListener("touchmove", onTouchMove, false);
