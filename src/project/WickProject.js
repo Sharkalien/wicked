@@ -202,7 +202,7 @@ WickProject.prototype.getAsJSON = function (callback, format) {
     self.library.encodeStrings();
 
     // Add some browser/OS/wick editor version info for debugging other ppl's projects
-    self.metaInfo = getBrowserAndOSInfo();
+    self.metaInfo = navigator.userAgent;
     self.metaInfo.wickVersion = wickEditor.version;
     self.metaInfo.dateSaved = new Date().toGMTString();
 

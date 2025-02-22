@@ -229,9 +229,6 @@ var MenuBarInterface = function (wickEditor) {
             new TabButton('Forums', function () {
                 window.open('https://forum.wickeditor.com/')
             }),
-            new TabButton('Browser Info', function () {
-                wickEditor.guiActionHandler.doAction('printBrowserInfo');
-            }),
         ]);
 
         addTab('About', [
