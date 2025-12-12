@@ -20,7 +20,7 @@ var WickObject = function () {
 // Internals
 
     // Unique id
-    this.uuid = random.uuid4();
+    this.uuid = crypto.randomUUID();
 
     // Name is optional, added by user
     this.name = undefined;
@@ -200,7 +200,7 @@ WickObject.prototype.copy = function () {
     copiedObject.flipX = this.flipX;
     copiedObject.flipY = this.flipY;
     copiedObject.opacity = this.opacity;
-    copiedObject.uuid = random.uuid4();
+    copiedObject.uuid = crypto.randomUUID();
     copiedObject.sourceUUID = this.uuid;
     copiedObject.assetUUID = this.assetUUID;
     copiedObject.svgX = this.svgX;

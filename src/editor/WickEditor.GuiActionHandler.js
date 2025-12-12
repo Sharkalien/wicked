@@ -542,15 +542,15 @@ var GuiActionHandler = function (wickEditor) {
                             if(c.name === obj.name) obj.name = undefined;
                         });
                         obj.getAllChildObjectsRecursive().forEach(function (child) {
-                            child.uuid = random.uuid4();
+                            child.uuid = crypto.randomUUID();
                             (child.layers||[]).forEach(function (layer) {
                                 layer.frames.forEach(function (frame) {
-                                    frame.uuid = random.uuid4();
+                                    frame.uuid = crypto.randomUUID();
                                 })
                             });
                         });
                         obj.getAllFrames().forEach(function (frame) {
-                            frame.uuid = random.uuid4();
+                            frame.uuid = crypto.randomUUID();
                         });
                     });
                     wickEditor.actionHandler.doAction('addObjects', {
@@ -564,14 +564,14 @@ var GuiActionHandler = function (wickEditor) {
                             firstPlayheadPosition = frame.playheadPosition;
                     });
                     frames.forEach(function (frame) {
-                        frame.uuid = random.uuid4();
+                        frame.uuid = crypto.randomUUID();
                         if(frame.name) frame.name = frame.name;
                         frame.playheadPosition -= firstPlayheadPosition;
                         frame.playheadPosition += wickEditor.project.getCurrentObject().playheadPosition;
 
                         frame.wickObjects.forEach(function (wickObject) {
                             wickObject.getAllChildObjectsRecursive().forEach(function (child) {
-                                child.uuid = random.uuid4();
+                                child.uuid = crypto.randomUUID();
                             });
                         });
                     });

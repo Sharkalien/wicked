@@ -29,7 +29,7 @@ var WickTween = function() {
     this.playheadPosition = 0;
     this.rotations = 0;
 
-    this.uuid = random.uuid4();
+    this.uuid = crypto.randomUUID();
 
     this.tweenType = 'Linear';
     this.tweenDir = 'None';

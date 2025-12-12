@@ -26,7 +26,7 @@ AssetLibrary.prototype.addAsset = function (asset) {
     if(asset.uuid) {
         this.assets[asset.uuid] = asset;
     } else {
-        var uuid = random.uuid4();
+        var uuid = crypto.randomUUID();
         this.assets[uuid] = asset;
         asset.uuid = uuid;
 

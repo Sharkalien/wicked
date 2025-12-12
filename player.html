@@ -2074,35 +2074,6 @@ function setPixelAt (x,y,width,height,imageData,color) {
     return Random.dice(sideCount, dieCount)(this.engine);
   };
 
-  // http://en.wikipedia.org/wiki/Universally_unique_identifier
-  Random.uuid4 = (function () {
-    function zeroPad(string, zeroCount) {
-      return stringRepeat("0", zeroCount - string.length) + string;
-    }
-
-    return function (engine) {
-      var a = engine() >>> 0;
-      var b = engine() | 0;
-      var c = engine() | 0;
-      var d = engine() >>> 0;
-
-      return (
-        zeroPad(a.toString(16), 8) +
-        "-" +
-        zeroPad((b & 0xffff).toString(16), 4) +
-        "-" +
-        zeroPad((((b >> 4) & 0x0fff) | 0x4000).toString(16), 4) +
-        "-" +
-        zeroPad(((c & 0x3fff) | 0x8000).toString(16), 4) +
-        "-" +
-        zeroPad(((c >> 4) & 0xffff).toString(16), 4) +
-        zeroPad(d.toString(16), 8));
-    };
-  }());
-  proto.uuid4 = function () {
-    return Random.uuid4(this.engine);
-  };
-
   Random.string = (function () {
     // has 2**x chars, for faster uniform distribution
     var DEFAULT_STRING_POOL = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_-";
@@ -3205,7 +3176,7 @@ var WickTween = function() {
     this.playheadPosition = 0;
     this.rotations = 0;
 
-    this.uuid = random.uuid4();
+    this.uuid = crypto.randomUUID();
 
     this.tweenType = 'Linear';
     this.tweenDir = 'None';
@@ -3317,7 +3288,7 @@ var WickFrame = function () {
     this.alwaysSaveState = false;
 
     // Generate unique id
-    this.uuid = random.uuid4();
+    this.uuid = crypto.randomUUID();
 
     // The layer that this frame belongs to
     this.parentLayer = null;
@@ -3461,7 +3432,7 @@ WickFrame.prototype.copy = function () {
     copiedFrame.playheadPosition = this.playheadPosition;
     copiedFrame.length = this.length;
     copiedFrame.wickScript = this.wickScript;
-    copiedFrame.uuid = random.uuid4();
+    copiedFrame.uuid = crypto.randomUUID();
     copiedFrame.sourceUUID = this.uuid;
 
     this.wickObjects.forEach(function (wickObject) {
@@ -3565,12 +3536,12 @@ WickFrame.fromJSON = function (frameJSON) {
             tween.__proto__ = WickTween.prototype;
         });
     }
-    frame.uuid = random.uuid4();
+    frame.uuid = crypto.randomUUID();
     frame.wickObjects.forEach(function (wickObject) {
         WickObject.addPrototypes(wickObject);
         wickObject.generateParentObjectReferences();
         wickObject.decodeStrings();
-        wickObject.uuid = random.uuid4();
+        wickObject.uuid = crypto.randomUUID();
     })
     return frame;
 }
@@ -3932,7 +3903,7 @@ var WickObject = function () {
 // Internals
 
     // Unique id
-    this.uuid = random.uuid4();
+    this.uuid = crypto.randomUUID();
 
     // Name is optional, added by user
     this.name = undefined;
@@ -4112,7 +4083,7 @@ WickObject.prototype.copy = function () {
     copiedObject.flipX = this.flipX;
     copiedObject.flipY = this.flipY;
     copiedObject.opacity = this.opacity;
-    copiedObject.uuid = random.uuid4();
+    copiedObject.uuid = crypto.randomUUID();
     copiedObject.sourceUUID = this.uuid;
     copiedObject.assetUUID = this.assetUUID;
     copiedObject.svgX = this.svgX;
@@ -5236,7 +5207,7 @@ var WickProject = function () {
 
     this.framerate = 24;
 
-    this.uuid = random.uuid4();
+    this.uuid = crypto.randomUUID();
 
     this._selection = [];
 
@@ -5523,7 +5494,7 @@ WickProject.prototype.addObject = function (wickObject, zIndex, ignoreSymbolOffs
         wickObject.y -= insideSymbolOffset.y;
     }
 
-    if(!wickObject.uuid) wickObject.uuid = random.uuid4();
+    if(!wickObject.uuid) wickObject.uuid = crypto.randomUUID();
     
     if(zIndex === undefined || zIndex === null) {
         frame.wickObjects.push(wickObject);
@@ -6093,7 +6064,7 @@ AssetLibrary.prototype.addAsset = function (asset) {
     if(asset.uuid) {
         this.assets[asset.uuid] = asset;
     } else {
-        var uuid = random.uuid4();
+        var uuid = crypto.randomUUID();
         this.assets[uuid] = asset;
         asset.uuid = uuid;
 

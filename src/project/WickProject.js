@@ -42,7 +42,7 @@ var WickProject = function () {
 
     this.framerate = 24;
 
-    this.uuid = random.uuid4();
+    this.uuid = crypto.randomUUID();
 
     this._selection = [];
 
@@ -332,7 +332,7 @@ WickProject.prototype.addObject = function (wickObject, zIndex, ignoreSymbolOffs
         wickObject.y -= insideSymbolOffset.y;
     }
 
-    if(!wickObject.uuid) wickObject.uuid = random.uuid4();
+    if(!wickObject.uuid) wickObject.uuid = crypto.randomUUID();
     
     if(zIndex === undefined || zIndex === null) {
         frame.wickObjects.push(wickObject);

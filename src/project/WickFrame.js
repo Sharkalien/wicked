@@ -37,7 +37,7 @@ var WickFrame = function () {
     this.alwaysSaveState = false;
 
     // Generate unique id
-    this.uuid = random.uuid4();
+    this.uuid = crypto.randomUUID();
 
     // The layer that this frame belongs to
     this.parentLayer = null;
@@ -180,7 +180,7 @@ WickFrame.prototype.copy = function () {
     copiedFrame.playheadPosition = this.playheadPosition;
     copiedFrame.length = this.length;
     copiedFrame.wickScript = this.wickScript;
-    copiedFrame.uuid = random.uuid4();
+    copiedFrame.uuid = crypto.randomUUID();
     copiedFrame.sourceUUID = this.uuid;
 
     this.wickObjects.forEach(function (wickObject) {
@@ -295,12 +295,12 @@ WickFrame.fromJSON = function (frameJSON) {
             tween.__proto__ = WickTween.prototype;
         });
     }
-    frame.uuid = random.uuid4();
+    frame.uuid = crypto.randomUUID();
     frame.wickObjects.forEach(function (wickObject) {
         WickObject.addPrototypes(wickObject);
         wickObject.generateParentObjectReferences();
         wickObject.decodeStrings();
-        wickObject.uuid = random.uuid4();
+        wickObject.uuid = crypto.randomUUID();
     })
     return frame;
 }

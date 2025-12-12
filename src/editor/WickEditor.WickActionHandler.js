@@ -363,7 +363,7 @@ var WickActionHandler = function (wickEditor) {
 
             // Create symbol out of objects
             objects.forEach(function (obj) {
-                obj.uuid = random.uuid4();
+                obj.uuid = crypto.randomUUID();
             })
 
             var symbol = new WickObject.createSymbolFromWickObjects(objects);
@@ -407,7 +407,7 @@ var WickActionHandler = function (wickEditor) {
             children.forEach(function (child) {
                 child.x += child.parentObject.x;
                 child.y += child.parentObject.y;
-                child.uuid = random.uuid4();
+                child.uuid = crypto.randomUUID();
                 wickEditor.project.addObject(child, null, true);
             });
 

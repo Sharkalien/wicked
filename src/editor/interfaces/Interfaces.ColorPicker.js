@@ -43,7 +43,7 @@ var ColorPickerInterface = function (wickEditor) {
 
         colorPicker = document.createElement('input');
         colorPicker.type = 'text';
-        colorPicker.id = random.uuid4();
+        colorPicker.id = crypto.randomUUID();
         colorPickerContainer.appendChild(colorPicker);
 
         spectrumContainer = $("#"+colorPicker.id);
